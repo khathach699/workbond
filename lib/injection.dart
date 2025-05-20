@@ -7,7 +7,6 @@ import 'package:workbond/data/datasources/local/auth_local_datasource.dart';
 import 'package:workbond/data/datasources/remote/auth_remote_datasource.dart';
 import 'package:workbond/data/repositories/auth_repository.dart';
 import 'package:workbond/domain/repositories/auth_repository_impl.dart';
-import 'package:workbond/domain/repositories/user_repository_impl.dart';
 import 'package:workbond/domain/usecases/auth/login_usecase.dart';
 import 'package:workbond/domain/usecases/auth/register_usecase.dart';
 import 'package:workbond/presentation/blocs/auth/login/login_bloc.dart';

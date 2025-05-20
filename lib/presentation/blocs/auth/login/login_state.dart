@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import '../../../../domain/entities/user_entity.dart';
 
 abstract class LoginState extends Equatable {
   @override
@@ -11,7 +10,6 @@ class AuthInitial extends LoginState {}
 class AuthLoading extends LoginState {}
 
 class AuthSuccess extends LoginState {}
-
 
 class AuthError extends LoginState {
   final String message;

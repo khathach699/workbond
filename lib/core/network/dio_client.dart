@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../utils/api_constants.dart';
@@ -34,27 +32,34 @@ class DioClient {
           final resData = response.data;
           if (resData is Map<String, dynamic>) {
             if (resData['code'] == 200 && resData['data'] != null) {
-              // Thay đổi response.data thành data con bên trong để các tầng dưới dùng thẳng
               response.data = resData['data'];
               return handler.next(response);
             } else {
-              // Nếu code khác 200 thì ném lỗi, bạn có thể tùy chỉnh Exception
+              // Xử lý lỗi khi code không phải 200
+              String errorMessage =
+                  resData['message'] ?? 'Lỗi: mã ${resData['code']}';
               return handler.reject(
                 DioException(
                   requestOptions: response.requestOptions,
-                  error: 'Error: code ${resData['code']}',
+                  error: errorMessage,
                   response: response,
                 ),
               );
             }
           } else {
-            // Nếu response.data không đúng định dạng
             return handler.next(response);
           }
         },
         onError: (DioException e, handler) async {
           Logger.error('Error: ${e.message}');
           Logger.error('Response Data: ${e.response?.data}');
+
+          // Trích xuất thông báo lỗi từ dữ liệu phản hồi
+          String errorMessage = e.message ?? 'Đã xảy ra lỗi';
+          if (e.response?.data is Map<String, dynamic>) {
+            errorMessage = e.response!.data['message'] ?? errorMessage;
+          }
+
           if (e.response?.statusCode == 401) {
             try {
               final newToken = await _refreshToken();
@@ -62,10 +67,22 @@ class DioClient {
               return handler.resolve(await _dio.fetch(e.requestOptions));
             } catch (_) {
               await _storage.deleteAll();
-              return handler.next(e);
+              return handler.next(
+                DioException(
+                  requestOptions: e.requestOptions,
+                  error: errorMessage,
+                  response: e.response,
+                ),
+              );
             }
           }
-          return handler.next(e);
+          return handler.next(
+            DioException(
+              requestOptions: e.requestOptions,
+              error: errorMessage,
+              response: e.response,
+            ),
+          );
         },
       ),
     );
@@ -73,7 +90,7 @@ class DioClient {
 
   Future<String> _refreshToken() async {
     final refreshToken = await _storage.read(key: 'refresh_token');
-    if (refreshToken == null) throw Exception('No refresh token');
+    if (refreshToken == null) throw Exception('Không có refresh token');
     final response = await _dio.post(
       '/auth/refresh',
       data: {'refresh_token': refreshToken},

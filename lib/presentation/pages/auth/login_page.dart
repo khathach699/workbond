@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toastification/toastification.dart';
 import 'package:workbond/core/utils/app_images.dart';
 import 'package:workbond/core/utils/app_strings.dart';
 import 'package:workbond/core/utils/responsive.dart';
 import 'package:workbond/core/utils/responsive_helper.dart';
+import 'package:workbond/core/utils/toast_utils.dart';
 import 'package:workbond/core/validator/auth_validator.dart';
 import 'package:workbond/presentation/blocs/auth/login/login_bloc.dart';
 import 'package:workbond/presentation/blocs/auth/login/login_event.dart';
@@ -19,6 +21,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -194,16 +197,18 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: responsive.heightPercentage(3)),
                       BlocConsumer<LoginBloc, LoginState>(
                         listener: (context, state) {
-                          print('LoginBloc state: $state');
                           if (state is AuthSuccess) {
-                            print('Navigating to /home due to AuthSuccess');
-                            _saveCredentials(); // Lưu thông tin nếu đăng nhập thành công
+                            _saveCredentials();
+                            ToastUtils.showCustomToast(context,
+                                title: "Success",
+                                message: "Login Success",
+                                type: ToastificationType.success);
                             context.go('/home');
                           } else if (state is AuthError) {
-                            print('Showing error: ${state.message}');
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(state.message)),
-                            );
+                            ToastUtils.showCustomToast(context,
+                                title: "Error",
+                                message: state.message,
+                                type: ToastificationType.success);
                           }
                         },
                         builder: (context, state) {

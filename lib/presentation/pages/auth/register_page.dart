@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:toastification/toastification.dart';
 import 'package:workbond/core/utils/app_images.dart';
 import 'package:workbond/core/utils/app_strings.dart';
 import 'package:workbond/core/utils/responsive.dart';
 import 'package:workbond/core/utils/responsive_helper.dart';
+import 'package:workbond/core/utils/toast_utils.dart';
 import 'package:workbond/core/validator/auth_validator.dart';
 import 'package:workbond/presentation/blocs/auth/register/register_event.dart';
 import 'package:workbond/presentation/blocs/auth/register/register_state.dart';
@@ -18,6 +20,7 @@ class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _RegisterPageState createState() => _RegisterPageState();
 }
 
@@ -41,7 +44,6 @@ class _RegisterPageState extends State<RegisterPage> {
   // Xử lý submit form đăng ký
   void _onRegisterPressed(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      print('Form validated, sending RegisterSubmitted');
       context.read<RegisterBloc>().add(
             RegisterSubmitted(
               _fullNameController.text.trim(),
@@ -49,8 +51,6 @@ class _RegisterPageState extends State<RegisterPage> {
               _passwordController.text.trim(),
             ),
           );
-    } else {
-      print('Form validation failed');
     }
   }
 
@@ -183,7 +183,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       SizedBox(height: responsive.heightPercentage(3)),
                       BlocConsumer<RegisterBloc, RegisterState>(
                         listener: (context, state) {
-                          print('RegisterBloc state: $state');
                           if (state is RegisterSuccess) {
                             print(
                                 'Navigating to /login due to RegisterSuccess');
@@ -191,12 +190,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             _fullNameController.clear();
                             _passwordController.clear();
                             _confirmPasswordController.clear();
+                            ToastUtils.showCustomToast(context,
+                                title: "Success",
+                                message: "Register Success",
+                                type: ToastificationType.success);
                             context.go('/login');
                           } else if (state is RegisterError) {
-                            print('Showing error: ${state.message}');
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(state.message)),
-                            );
+                            ToastUtils.showCustomToast(context,
+                                title: "Error",
+                                message: state.message,
+                                type: ToastificationType.error);
                           }
                         },
                         builder: (context, state) {
