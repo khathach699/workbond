@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../constants/api_constants.dart';
+import '../utils/api_constants.dart';
 import '../utils/logger.dart' as Logger;
 
 class DioClient {
@@ -9,9 +11,10 @@ class DioClient {
 
   DioClient(this._dio, this._storage) {
     _dio.options
-      ..baseUrl = ApiConstants.baseUrl
+      ..baseUrl = AppApi.baseUrl
       ..connectTimeout = Duration(seconds: 30)
-      ..receiveTimeout = Duration(seconds: 30);
+      ..receiveTimeout = Duration(seconds: 30)
+      ..contentType = 'application/json';
 
     _dio.interceptors.add(
       InterceptorsWrapper(
@@ -26,7 +29,27 @@ class DioClient {
         },
         onResponse: (response, handler) {
           Logger.log('Response: ${response.statusCode} ${response.data}');
-          return handler.next(response);
+
+          final resData = response.data;
+          if (resData is Map<String, dynamic>) {
+            if (resData['code'] == 200 && resData['data'] != null) {
+              // Thay đổi response.data thành data con bên trong để các tầng dưới dùng thẳng
+              response.data = resData['data'];
+              return handler.next(response);
+            } else {
+              // Nếu code khác 200 thì ném lỗi, bạn có thể tùy chỉnh Exception
+              return handler.reject(
+                DioException(
+                  requestOptions: response.requestOptions,
+                  error: 'Error: code ${resData['code']}',
+                  response: response,
+                ),
+              );
+            }
+          } else {
+            // Nếu response.data không đúng định dạng
+            return handler.next(response);
+          }
         },
         onError: (DioException e, handler) async {
           Logger.error('Error: ${e.message}');

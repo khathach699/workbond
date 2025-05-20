@@ -7,7 +7,8 @@ import 'package:workbond/injection.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: '.env');
   await di.init();
+
   runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
 }

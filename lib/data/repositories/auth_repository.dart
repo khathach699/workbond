@@ -20,7 +20,7 @@ class AuthRepositoryImpl implements AuthRepository {
         'password': password,
       });
       await localDataSource.cacheToken(authModel.token);
-      await localDataSource.cacheRefreshToken(authModel.refreshToken);
+      // await localDataSource.cacheRefreshToken(authModel.refreshToken);
       return authModel;
     } on DioException catch (e) {
       throw ServerException(e.message ?? 'Login failed');
@@ -40,7 +40,7 @@ class AuthRepositoryImpl implements AuthRepository {
         'password': password,
       });
       await localDataSource.cacheToken(authModel.token);
-      await localDataSource.cacheRefreshToken(authModel.refreshToken);
+      // await localDataSource.cacheRefreshToken(authModel.refreshToken);
       return authModel;
     } on DioException catch (e) {
       throw ServerException(e.message ?? 'Register failed');

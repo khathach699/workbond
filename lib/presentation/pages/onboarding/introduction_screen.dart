@@ -45,32 +45,32 @@ class OnboardingScreen extends StatelessWidget {
 
     return Scaffold(
       body: IntroductionScreen(
-        pages:
-            _pages.map((page) {
-              return PageViewModel(
-                titleWidget: Text(
-                  page.title!,
-                  style: AppStyle.heading2(context),
-                ),
-                bodyWidget: Text(
-                  page.body!,
-                  style: AppStyle.bodyText(context),
-                  textAlign: TextAlign.center,
-                ),
-                image: SizedBox(
-                  width: responsive.widthPercentage(60),
-                  child: page.image,
-                ),
-                decoration: PageDecoration(
-                  pageColor: AppStyle.appTheme(context).scaffoldBackgroundColor,
-                  titlePadding: AppStyle.defaultPadding(context),
-                  bodyPadding: AppStyle.defaultPadding(context),
-                ),
-              );
-            }).toList(),
+        pages: _pages.map((page) {
+          return PageViewModel(
+            titleWidget: Text(
+              page.title!,
+              style: AppStyle.heading2(context),
+            ),
+            bodyWidget: Text(
+              page.body!,
+              style: AppStyle.bodyText(context),
+              textAlign: TextAlign.center,
+            ),
+            image: SizedBox(
+              width: responsive.widthPercentage(60),
+              child: page.image,
+            ),
+            decoration: PageDecoration(
+              pageColor: AppStyle.appTheme(context).scaffoldBackgroundColor,
+              titlePadding: AppStyle.defaultPadding(context),
+              bodyPadding: AppStyle.defaultPadding(context),
+            ),
+          );
+        }).toList(),
         onDone: () {
           context.read<OnboardingBloc>().add(CompleteOnboarding());
           context.go('/login');
+          // context.push('/login');
         },
         onSkip: () {
           context.read<OnboardingBloc>().add(CompleteOnboarding());

@@ -29,6 +29,7 @@ dependencies:
   introduction_screen: ^3.1.17
   flutter_native_splash: ^2.4.4
   device_preview: ^1.1.0
+  icons_plus: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +46,8 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/logos/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
   # fonts:
   #   - family: Schyler

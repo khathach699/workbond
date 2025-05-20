@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/user_entity.dart';
+import '../../../../domain/entities/user_entity.dart';
 
-abstract class AuthState extends Equatable {
+abstract class LoginState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class AuthInitial extends AuthState {}
+class AuthInitial extends LoginState {}
 
-class AuthLoading extends AuthState {}
+class AuthLoading extends LoginState {}
 
-class AuthSuccess extends AuthState {}
+class AuthSuccess extends LoginState {}
 
-class ProfileLoaded extends AuthState {
+class ProfileLoaded extends LoginState {
   final UserEntity user;
 
   ProfileLoaded(this.user);
@@ -21,7 +21,7 @@ class ProfileLoaded extends AuthState {
   List<Object?> get props => [user];
 }
 
-class AuthError extends AuthState {
+class AuthError extends LoginState {
   final String message;
 
   AuthError(this.message);

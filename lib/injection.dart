@@ -13,7 +13,7 @@ import 'domain/usecases/auth/register_usecase.dart';
 import 'domain/usecases/auth/get_profile_usecase.dart';
 import 'domain/usecases/auth/update_profile_usecase.dart';
 import 'domain/usecases/auth/delete_account_usecase.dart';
-import 'presentation/blocs/auth/auth_bloc.dart';
+import 'presentation/blocs/auth/login/login_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -47,7 +47,7 @@ Future<void> init() async {
 
   // Presentation
   sl.registerFactory(
-    () => AuthBloc(
+    () => LoginBloc(
       loginUseCase: sl<LoginUseCase>(),
       registerUseCase: sl<RegisterUseCase>(),
       getProfileUseCase: sl<GetProfileUseCase>(),
@@ -58,4 +58,6 @@ Future<void> init() async {
 
   // onboarding
   sl.registerLazySingleton(() => OnboardingBloc());
+
+  //register
 }

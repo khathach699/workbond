@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 
 class AuthEntity extends Equatable {
   final String token;
-  final String refreshToken;
+  final bool authenticated;
 
-  const AuthEntity({required this.token, required this.refreshToken});
+  const AuthEntity({required this.token, required this.authenticated});
 
   @override
-  List<Object?> get props => [token, refreshToken];
+  List<Object?> get props => [token, authenticated];
 }

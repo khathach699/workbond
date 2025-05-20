@@ -1,20 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/usecases/auth/login_usecase.dart';
-import '../../../domain/usecases/auth/register_usecase.dart';
-import '../../../domain/usecases/auth/get_profile_usecase.dart';
-import '../../../domain/usecases/auth/update_profile_usecase.dart';
-import '../../../domain/usecases/auth/delete_account_usecase.dart';
-import 'auth_event.dart';
-import 'auth_state.dart';
+import '../../../../domain/usecases/auth/login_usecase.dart';
+import '../../../../domain/usecases/auth/register_usecase.dart';
+import '../../../../domain/usecases/auth/get_profile_usecase.dart';
+import '../../../../domain/usecases/auth/update_profile_usecase.dart';
+import '../../../../domain/usecases/auth/delete_account_usecase.dart';
+import 'login_event.dart';
+import 'login_state.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;
   final GetProfileUseCase getProfileUseCase;
   final UpdateProfileUseCase updateProfileUseCase;
   final DeleteAccountUseCase deleteAccountUseCase;
 
-  AuthBloc({
+  LoginBloc({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.getProfileUseCase,

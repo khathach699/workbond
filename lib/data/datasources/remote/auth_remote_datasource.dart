@@ -8,7 +8,7 @@ class AuthRemoteDataSource {
   AuthRemoteDataSource(this.apiService);
 
   Future<AuthModel> login(Map<String, dynamic> credentials) async {
-    final response = await apiService.post('auth/login', credentials, null);
+    final response = await apiService.post('auth', credentials, null);
     return AuthModel.fromJson(response);
   }
 
