@@ -12,14 +12,6 @@ class AuthLoading extends LoginState {}
 
 class AuthSuccess extends LoginState {}
 
-class ProfileLoaded extends LoginState {
-  final UserEntity user;
-
-  ProfileLoaded(this.user);
-
-  @override
-  List<Object?> get props => [user];
-}
 
 class AuthError extends LoginState {
   final String message;

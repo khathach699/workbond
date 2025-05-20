@@ -39,4 +39,10 @@ class AppStrings {
   static const String policy =
       "I agree to the Term & Conditions & Privacy Policy set out by this site.";
   static const String haveAccount = "Have an account?";
+
+  // validator
+  static const String emailEmpty = "Please enter Email";
+  static const String fullNameEmpty = "Please enter full name";
+  static const String emptyPassword = "Please enter the password";
+  static const String matchPassword = "Password do not match";
 }

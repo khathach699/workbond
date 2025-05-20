@@ -5,10 +5,10 @@ import 'package:workbond/core/utils/responsive.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final IconData? icon;
-  final VoidCallback? onPressed; // Made nullable to handle disabled state
-  final bool isLoading; // Add loading state
-  final Color? backgroundColor; // Optional custom background color
-  final Color? textColor; // Optional custom text color
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   const CustomButton({
     super.key,
@@ -25,7 +25,7 @@ class CustomButton extends StatelessWidget {
     final responsive = Responsive.of(context);
 
     return ElevatedButton(
-      onPressed: isLoading ? null : onPressed, // Disable if loading
+      onPressed: isLoading ? null : onPressed, // Vô hiệu hóa khi đang tải
       style: ElevatedButton.styleFrom(
         minimumSize: Size(double.infinity, responsive.scaleHeight(48)),
         padding: EdgeInsets.symmetric(
@@ -34,16 +34,14 @@ class CustomButton extends StatelessWidget {
         ),
         textStyle: TextStyle(
           fontSize: responsive.fontSize(16),
-          color:
-              textColor ?? Colors.white, // Default to white unless overridden
+          color: textColor ?? Colors.white,
         ),
         backgroundColor: backgroundColor ?? AppColors.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        elevation: 2, // Slight shadow for better visual feedback
-        disabledBackgroundColor:
-            AppColors.primaryColor.withOpacity(0.5), // Dimmed when disabled
+        elevation: 2,
+        disabledBackgroundColor: AppColors.primaryColor.withOpacity(0.5),
       ),
       child: isLoading
           ? SizedBox(

@@ -10,6 +10,8 @@ import 'package:workbond/presentation/pages/auth/register_page.dart';
 import 'package:workbond/presentation/pages/home/home_page.dart';
 import 'package:workbond/presentation/pages/onboarding/introduction_screen.dart';
 
+import '../blocs/auth/register/register_bloc.dart';
+
 class AppRouter {
   var log = Logger();
 
@@ -57,7 +59,10 @@ class AppRouter {
         ),
         GoRoute(
           path: '/register',
-          builder: (context, state) => const RegisterPage(),
+          builder: (context, state) => BlocProvider(
+            create: (context) => GetIt.I<RegisterBloc>(),
+            child: RegisterPage(),
+          ),
         ),
       ],
     );

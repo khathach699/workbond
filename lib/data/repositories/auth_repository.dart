@@ -28,25 +28,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<AuthEntity> register(
-    String name,
+  Future<UserEntity> register(
+    String fullName,
     String email,
     String password,
   ) async {
     try {
-      final authModel = await remoteDataSource.register({
-        'name': name,
+      final registerModel = await remoteDataSource.register({
+        'fullName': fullName,
         'email': email,
         'password': password,
       });
-      await localDataSource.cacheToken(authModel.token);
-      // await localDataSource.cacheRefreshToken(authModel.refreshToken);
-      return authModel;
+      return registerModel;
     } on DioException catch (e) {
       throw ServerException(e.message ?? 'Register failed');
     }
   }
-
 
 
 }

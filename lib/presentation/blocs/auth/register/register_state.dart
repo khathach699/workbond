@@ -11,6 +11,10 @@ class RegisterLoading extends RegisterState {}
 
 class RegisterSuccess extends RegisterState {}
 
-// class ProfileLoaded extends RegisterState {
-//   final
-// }
+class RegisterError extends RegisterState {
+  final String message;
+  RegisterError(this.message);
+  @override
+  List<Object?> get props => [message];
+
+}

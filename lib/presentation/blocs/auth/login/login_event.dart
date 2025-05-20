@@ -29,16 +29,3 @@ class RegisterSubmitted extends LoginEvent {
   List<Object?> get props => [name, email, password];
 }
 
-class GetProfileRequested extends LoginEvent {}
-
-class UpdateProfileSubmitted extends LoginEvent {
-  final String name;
-  final String email;
-
-  UpdateProfileSubmitted(this.name, this.email);
-
-  @override
-  List<Object?> get props => [name, email];
-}
-
-class DeleteAccountRequested extends LoginEvent {}
