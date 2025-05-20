@@ -47,34 +47,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
-  Future<UserEntity> getProfile() async {
-    try {
-      return await remoteDataSource.getProfile();
-    } on DioException catch (e) {
-      throw ServerException(e.message ?? 'Failed to fetch profile');
-    }
-  }
 
-  @override
-  Future<UserEntity> updateProfile(String name, String email) async {
-    try {
-      return await remoteDataSource.updateProfile({
-        'name': name,
-        'email': email,
-      });
-    } on DioException catch (e) {
-      throw ServerException(e.message ?? 'Failed to update profile');
-    }
-  }
 
-  @override
-  Future<void> deleteAccount() async {
-    try {
-      await remoteDataSource.deleteAccount();
-      await localDataSource.clearTokens();
-    } on DioException catch (e) {
-      throw ServerException(e.message ?? 'Failed to delete account');
-    }
-  }
 }

@@ -7,7 +7,4 @@ class UpdateProfileUseCase {
 
   UpdateProfileUseCase(this.repository);
 
-  Future<UserEntity> call(String name, String email) {
-    return repository.updateProfile(name, email);
-  }
 }

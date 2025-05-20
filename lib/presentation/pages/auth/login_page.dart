@@ -103,7 +103,16 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: responsive.heightPercentage(3),
                   ),
-                  BlocBuilder<LoginBloc, LoginState>(
+                  BlocConsumer<LoginBloc, LoginState>(
+                    listener: (context, state) {
+                      if(state is AuthSuccess){
+                          context.go("/home");
+                      }else if(state is AuthError){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.message)),
+                        );
+                      }
+                    },
                     builder: (context, state) {
                       return CustomButton(
                         text: AppStrings.login,

@@ -25,6 +25,7 @@ class DioClient {
             // options.headers['x-api-key'] = ApiConstants.apiKey;
           }
           Logger.log('Request: ${options.method} ${options.uri}');
+          Logger.log('Request Body: ${options.data}');
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -53,6 +54,7 @@ class DioClient {
         },
         onError: (DioException e, handler) async {
           Logger.error('Error: ${e.message}');
+          Logger.error('Response Data: ${e.response?.data}');
           if (e.response?.statusCode == 401) {
             try {
               final newToken = await _refreshToken();

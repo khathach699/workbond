@@ -10,9 +10,6 @@ import 'data/datasources/remote/auth_remote_datasource.dart';
 import 'data/repositories/auth_repository.dart';
 import 'domain/usecases/auth/login_usecase.dart';
 import 'domain/usecases/auth/register_usecase.dart';
-import 'domain/usecases/auth/get_profile_usecase.dart';
-import 'domain/usecases/auth/update_profile_usecase.dart';
-import 'domain/usecases/auth/delete_account_usecase.dart';
 import 'presentation/blocs/auth/login/login_bloc.dart';
 
 final sl = GetIt.instance;
@@ -41,18 +38,13 @@ Future<void> init() async {
   // Domain
   sl.registerLazySingleton(() => LoginUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => RegisterUseCase(sl<AuthRepository>()));
-  sl.registerLazySingleton(() => GetProfileUseCase(sl<AuthRepository>()));
-  sl.registerLazySingleton(() => UpdateProfileUseCase(sl<AuthRepository>()));
-  sl.registerLazySingleton(() => DeleteAccountUseCase(sl<AuthRepository>()));
 
   // Presentation
   sl.registerFactory(
     () => LoginBloc(
       loginUseCase: sl<LoginUseCase>(),
       registerUseCase: sl<RegisterUseCase>(),
-      getProfileUseCase: sl<GetProfileUseCase>(),
-      updateProfileUseCase: sl<UpdateProfileUseCase>(),
-      deleteAccountUseCase: sl<DeleteAccountUseCase>(),
+
     ),
   );
 
