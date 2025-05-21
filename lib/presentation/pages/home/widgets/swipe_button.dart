@@ -12,13 +12,13 @@ class SwipeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: responsive.padding(all: 5),
       child: SlideAction(
-        height: 50.h,
-        borderRadius: 10.r,
+        height: responsive.heightPercentage(6.5),
+        borderRadius: 15.r,
         innerColor: Colors.white,
         outerColor: Colors.blue,
-        elevation: 0,
+        elevation: 2,
         sliderButtonIcon: Icon(Icons.arrow_forward, color: Colors.blue),
         text: AppStrings.swipeCheckIn,
         textStyle: TextStyle(

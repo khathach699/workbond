@@ -10,6 +10,7 @@ import 'package:workbond/presentation/pages/auth/login_page.dart';
 import 'package:workbond/presentation/pages/auth/register_page.dart';
 import 'package:workbond/presentation/pages/home/home_page.dart';
 import 'package:workbond/presentation/pages/onboarding/introduction_screen.dart';
+import 'package:workbond/presentation/pages/profiles/profile_page.dart';
 
 import '../blocs/auth/register/register_bloc.dart';
 
@@ -20,7 +21,7 @@ class AppRouter {
     // Access OnboardingBloc from GetIt
     final onboardingState = GetIt.I<OnboardingBloc>().state;
     final initialLocation = kDebugMode
-        ? '/home' // Hoặc trang bạn muốn giữ khi hot reload
+        ? '/login'
         : (onboardingState is OnboardingStatus &&
                 onboardingState.hasSeenOnboarding
             ? '/login'
@@ -67,6 +68,10 @@ class AppRouter {
             child: RegisterPage(),
           ),
         ),
+        GoRoute(
+          path: "/profile",
+          builder: (context, state) => ProfilePage(),
+        )
       ],
     );
   }

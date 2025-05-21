@@ -87,7 +87,7 @@ class AttendanceCards extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: responsive.heightPercentage(1.5)),
+          SizedBox(height: responsive.heightPercentage(1)),
           Text(
             time,
             style: TextStyle(
@@ -96,7 +96,7 @@ class AttendanceCards extends StatelessWidget {
               color: AppColors.textColor,
             ),
           ),
-          SizedBox(height: responsive.heightPercentage(1)),
+          SizedBox(height: responsive.heightPercentage(0.5)),
           Text(
             subtitle,
             style: TextStyle(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:workbond/core/utils/app_colors.dart';
+import 'package:workbond/core/utils/app_strings.dart';
 import 'package:workbond/core/utils/responsive.dart';
 
 class ActivityList extends StatelessWidget {
@@ -21,7 +23,8 @@ class ActivityList extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
+                // ignore: deprecated_member_use
+                color: Colors.grey.withOpacity(0.7),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: const Offset(0, 3),
@@ -38,7 +41,7 @@ class ActivityList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Check In",
+                    AppStrings.checkIn,
                     style: TextStyle(
                       fontSize: responsive.fontSize(14),
                       color: Colors.grey,
@@ -62,12 +65,12 @@ class ActivityList extends StatelessWidget {
                     style: TextStyle(
                       fontSize: responsive.fontSize(14),
                       fontWeight: FontWeight.bold,
-                      color:
-                          Colors.black, // Thay bằng AppColors.textColor nếu có
+                      color: AppColors
+                          .textColor, // Thay bằng AppColors.textColor nếu có
                     ),
                   ),
                   Text(
-                    "On Time",
+                    AppStrings.onTime,
                     style: TextStyle(
                       fontSize: responsive.fontSize(12),
                       color: Colors.green,

@@ -1,4 +1,3 @@
-// lib/presentation/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:workbond/core/utils/app_colors.dart';
@@ -6,21 +5,24 @@ import 'package:workbond/core/utils/app_images.dart';
 import 'package:workbond/core/utils/app_strings.dart';
 import 'package:workbond/core/utils/responsive.dart';
 
-// Custom AppBar widget
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  final double height;
+
+  // Truyền height từ ngoài, hoặc mặc định 10% chiều cao màn hình
+  const CustomAppBar({super.key, required this.height});
 
   @override
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
     return AppBar(
       backgroundColor: AppColors.backgroundColor,
+      toolbarHeight: height,
       elevation: 2,
       title: Row(
         children: [
           CircleAvatar(
             backgroundColor: AppColors.greyLight,
-            radius: 16.r,
+            radius: 16.r, // có thể dùng responsive nếu cần
             child: ClipOval(
               child: Image.asset(
                 AppImages.avatar,
@@ -34,6 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   AppStrings.name,
@@ -68,5 +71,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height);
 }
