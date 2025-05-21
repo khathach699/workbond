@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:workbond/core/theme/theme.dart';
+import 'package:workbond/presentation/blocs/home/calendar/calendar_event.dart';
 import 'package:workbond/presentation/blocs/onboarding/onboarding_event.dart';
-import 'package:workbond/presentation/router/app_router.dart';
 import 'package:workbond/presentation/blocs/onboarding/onboarding_bloc.dart';
+import 'package:workbond/presentation/blocs/home/calendar/calendar_bloc.dart';
+import 'package:workbond/presentation/router/app_router.dart';
 
 class MyApp extends StatelessWidget {
   final _appRouter = AppRouter();
@@ -20,12 +22,19 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider<OnboardingBloc>(
-          create: (context) {
-            final bloc = GetIt.I<OnboardingBloc>();
-            bloc.add(CheckOnboardingStatus());
-            return bloc;
-          },
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<OnboardingBloc>(
+              create: (context) {
+                final bloc = GetIt.I<OnboardingBloc>();
+                bloc.add(CheckOnboardingStatus());
+                return bloc;
+              },
+            ),
+            BlocProvider<CalendarBloc>(
+              create: (context) => GetIt.I<CalendarBloc>()..add(LoadCalendar()),
+            ),
+          ],
           child: MaterialApp.router(
             locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,

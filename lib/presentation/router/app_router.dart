@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -18,10 +19,12 @@ class AppRouter {
   GoRouter router() {
     // Access OnboardingBloc from GetIt
     final onboardingState = GetIt.I<OnboardingBloc>().state;
-    final initialLocation =
-        onboardingState is OnboardingStatus && onboardingState.hasSeenOnboarding
+    final initialLocation = kDebugMode
+        ? '/home' // Hoặc trang bạn muốn giữ khi hot reload
+        : (onboardingState is OnboardingStatus &&
+                onboardingState.hasSeenOnboarding
             ? '/login'
-            : '/onboarding';
+            : '/onboarding');
 
     return GoRouter(
       initialLocation: initialLocation,

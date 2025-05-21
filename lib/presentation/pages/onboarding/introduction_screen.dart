@@ -8,7 +8,7 @@ import 'package:workbond/core/utils/app_style.dart';
 import 'package:workbond/core/utils/responsive.dart';
 import 'package:workbond/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'package:workbond/presentation/blocs/onboarding/onboarding_event.dart';
-import 'package:workbond/presentation/widgets/build_onboarding_image.dart';
+import 'package:workbond/presentation/pages/home/widgets/build_onboarding_image.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

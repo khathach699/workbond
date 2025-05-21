@@ -11,6 +11,7 @@ import 'package:workbond/domain/usecases/auth/login_usecase.dart';
 import 'package:workbond/domain/usecases/auth/register_usecase.dart';
 import 'package:workbond/presentation/blocs/auth/login/login_bloc.dart';
 import 'package:workbond/presentation/blocs/auth/register/register_bloc.dart';
+import 'package:workbond/presentation/blocs/home/calendar/calendar_bloc.dart';
 import 'package:workbond/presentation/blocs/onboarding/onboarding_bloc.dart';
 
 final sl = GetIt.instance;
@@ -51,4 +52,5 @@ Future<void> init() async {
     ),
   );
   sl.registerLazySingleton(() => OnboardingBloc());
+  sl.registerLazySingleton(() => CalendarBloc());
 }

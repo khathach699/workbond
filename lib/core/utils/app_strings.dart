@@ -45,4 +45,21 @@ class AppStrings {
   static const String fullNameEmpty = "Please enter full name";
   static const String emptyPassword = "Please enter the password";
   static const String matchPassword = "Password do not match";
+
+  //home
+  static const String name = 'KhaThach';
+  static const String profession = "Flutter - Mobile";
+  static const String todayAtendane = "Today Attendance";
+  static const String checkIn = "Check In";
+  static const String checkOut = "Check Out";
+  static const String onTime = "On time";
+  static const String goHome = "Go Home";
+  static const String breakTime = "Break Time";
+  static const String avgTine = "AVG Time 30 min";
+  static const String totolDay = "Total Days";
+  static const String workingDay = "Working Days";
+  static const String yourActivity = "Your Activity";
+  static const String viewAll = "View All";
+  static const String swipeCheckIn = "Swipe to Check In";
+  static const String swipeCheckOut = "Swipe to Check Out";
 }

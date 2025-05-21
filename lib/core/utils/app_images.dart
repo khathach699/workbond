@@ -6,4 +6,7 @@ class AppImages {
 
   // logos
   static const String logo = 'assets/logos/logo.jpg';
+
+  // home
+  static const String avatar = "assets/images/profile.jpg";
 }
