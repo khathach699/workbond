@@ -12,10 +12,10 @@ class SwipeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: responsive.padding(all: 5),
+      padding: responsive.padding(all: 0),
       child: SlideAction(
-        height: responsive.heightPercentage(6.5),
-        borderRadius: 15.r,
+        height: responsive.heightPercentage(6),
+        borderRadius: 10.r,
         innerColor: Colors.white,
         outerColor: Colors.blue,
         elevation: 2,

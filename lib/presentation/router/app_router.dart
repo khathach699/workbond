@@ -8,10 +8,14 @@ import 'package:workbond/presentation/blocs/onboarding/onboarding_bloc.dart';
 import 'package:workbond/presentation/blocs/onboarding/onboarding_state.dart';
 import 'package:workbond/presentation/pages/auth/login_page.dart';
 import 'package:workbond/presentation/pages/auth/register_page.dart';
+import 'package:workbond/presentation/pages/calendar/calendar_page.dart';
 import 'package:workbond/presentation/pages/home/home_page.dart';
+import 'package:workbond/presentation/pages/languages/language_page.dart';
+import 'package:workbond/presentation/pages/messages/group_page.dart';
+import 'package:workbond/presentation/pages/notifications/notification_page.dart';
 import 'package:workbond/presentation/pages/onboarding/introduction_screen.dart';
 import 'package:workbond/presentation/pages/profiles/profile_page.dart';
-
+import 'package:workbond/presentation/pages/profiles/widgets/change_password.dart';
 import '../blocs/auth/register/register_bloc.dart';
 
 class AppRouter {
@@ -61,6 +65,26 @@ class AppRouter {
           path: '/home',
           builder: (context, state) => const HomePage(),
         ),
+
+        // profile
+        GoRoute(
+            path: "/profile", builder: (context, state) => const ProfilePage()),
+
+        GoRoute(
+            path: "/language",
+            builder: (context, state) => const LanguageSelectionScreen()),
+
+        GoRoute(
+            path: "/change_password",
+            builder: (context, state) => const ChangePassword()),
+        GoRoute(
+            path: "/notification",
+            builder: (context, state) => NotificationPage()),
+        GoRoute(
+            path: "/message", builder: (context, state) => const MessagePage()),
+        GoRoute(
+            path: "/calendar",
+            builder: (context, state) => const CalendarPage()),
         GoRoute(
           path: '/register',
           builder: (context, state) => BlocProvider(

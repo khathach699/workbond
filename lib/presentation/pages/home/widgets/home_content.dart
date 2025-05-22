@@ -72,6 +72,7 @@ class HomeContent extends StatelessWidget {
 
             // swipe to check in
             SwipeButton(responsive: responsive),
+            SizedBox(height: responsive.heightPercentage(2)),
           ],
         ),
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workbond/core/utils/responsive.dart';
 
-class GroupPage extends StatelessWidget {
-  const GroupPage({super.key});
+class MessagePage extends StatelessWidget {
+  const MessagePage({super.key});
 
   @override
   Widget build(BuildContext context) {

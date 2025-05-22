@@ -5,7 +5,7 @@ import 'package:workbond/core/utils/app_colors.dart';
 import 'package:workbond/core/utils/app_images.dart';
 import 'package:workbond/core/utils/app_strings.dart';
 import 'package:workbond/core/utils/responsive.dart';
-import 'package:workbond/presentation/pages/profiles/widgets/build_menu_item.dart';
+import 'package:workbond/presentation/pages/profiles/widgets/build_item_menu.dart';
 import 'package:workbond/presentation/widgets/custom_button.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -16,27 +16,6 @@ class ProfilePage extends StatelessWidget {
     final responsive = Responsive.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            context.pop(); // Quay lại trang trước đó
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: AppColors.textColor,
-          ),
-        ),
-        title: Text(
-          'Profile',
-          style: TextStyle(
-            color: AppColors.textColor,
-            fontSize: responsive.fontSize(20),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: responsive.padding(all: 10),
@@ -45,6 +24,7 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(height: responsive.heightPercentage(3)),
                 // Avatar và nút camera
                 Stack(
                   alignment: Alignment.center,
@@ -168,28 +148,33 @@ class ProfilePage extends StatelessWidget {
                       Divider(color: AppColors.textColor, thickness: 1),
                       SizedBox(height: responsive.heightPercentage(2)),
                       BuildMenuItem(
-                        icon: Icons.person_outline,
-                        title: "My Profile",
-                        onTap: () {},
+                        icon: Icons.password,
+                        title: "Change Password",
+                        onTap: () {
+                          context.push("/change_password");
+                        },
                       ),
                       BuildMenuItem(
-                        icon: Icons.settings_outlined,
+                        icon: Icons.language_outlined,
                         title: "Change Language",
-                        onTap: () {},
+                        onTap: () {
+                          context.push("/language");
+                        },
                       ),
                       BuildMenuItem(
-                        icon: Icons.description_outlined,
+                          icon: Icons.notification_important,
+                          title: "Notification",
+                          onTap: () {
+                            context.push("/notification");
+                          }),
+                      BuildMenuItem(
+                        icon: Icons.policy,
                         title: "Terms & Conditions",
                         onTap: () {},
                       ),
                       BuildMenuItem(
                         icon: Icons.privacy_tip_outlined,
                         title: "Privacy Policy",
-                        onTap: () {},
-                      ),
-                      BuildMenuItem(
-                        icon: Icons.privacy_tip_outlined,
-                        title: "Notification",
                         onTap: () {},
                       ),
                       Divider(),

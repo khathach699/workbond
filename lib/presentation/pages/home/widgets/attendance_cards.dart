@@ -15,8 +15,8 @@ class AttendanceCards extends StatelessWidget {
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      crossAxisSpacing: 15.w,
-      mainAxisSpacing: 15.h,
+      crossAxisSpacing: responsive.heightPercentage(2),
+      mainAxisSpacing: responsive.widthPercentage(2),
       childAspectRatio: 1.3,
       children: [
         _buildAttendanceCard(

@@ -20,10 +20,10 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeContent(), // Trang có AppBar tùy chỉnh
-    const CalendarPage(), // Trang có thể có AppBar riêng
-    const GroupPage(), // Trang không có AppBar
-    const ProfilePage(), // Trang có thể có AppBar riêng
+    const HomeContent(),
+    const CalendarPage(),
+    const MessagePage(),
+    const ProfilePage(),
   ];
 
   void _onTabTapped(int index) {
@@ -36,13 +36,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final responsive = Responsive.of(context);
 
-    // Xác định AppBar tương ứng với từng trang
     final List<PreferredSizeWidget?> appBars = [
-      CustomAppBar(
-          height: responsive.heightPercentage(10)), // AppBar cho HomeContent
-      AppBar(title: const Text('Calendar')), // AppBar đơn giản cho CalendarPage
+      CustomAppBar(height: responsive.heightPercentage(10)),
+      AppBar(title: const Text('Calendar')),
       null, // GroupPage không có AppBar
-      null // AppBar đơn giản cho ProfilePage
+      null
     ];
 
     return Scaffold(
